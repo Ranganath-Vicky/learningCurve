@@ -14,7 +14,7 @@ class Item:
         
         # Assign to self object - instance attribute
         self.__name = name #Dynamic attribute for class instance
-        self.price = price
+        self.__price = price
         self.quantity = quantity
 
         # Actions to execute
@@ -25,6 +25,18 @@ class Item:
     def name(self):
         return self.__name
     
+    @property
+    def price(self):
+        return self.__price
+    
+    def apply_discount(self):
+        self.__price = self.__price * self.pay_rate
+        return self.__price
+
+    def apply_increment(self, value):
+        self.__price = self.__price + self.__price * value
+        return self.__price
+    
     @name.setter # for setting a value to a attribute 
     def name(self, value):
         if len(value) > 10:
@@ -34,10 +46,9 @@ class Item:
             return self.__name 
 
     def calculate_total_price(self):
-        return self.price * self.quantity
+        return self.__price * self.quantity
     
-    def apply_discount(self):
-        self.price = self.price * self.pay_rate
+    
 
     @classmethod # Decorator to convert a method to classmethod
     def instantiate_from_csv(cls): # Class Method - class reference is passed as input argument
@@ -59,3 +70,20 @@ class Item:
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}',{self.price}, {self.quantity})"
+
+    def __connect(self):
+        pass
+
+    def __prepare_body(self):
+        return f"""
+        Hello SomeOne. 
+        We have {self.name} {self.quantity} times.
+        Thank you"""
+    
+    def __send(self):
+        pass
+
+    def send_email(self):
+        self.__connect()
+        self.__prepare_body()
+        self.__send()
