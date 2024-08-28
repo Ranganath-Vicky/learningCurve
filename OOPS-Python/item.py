@@ -27,8 +27,11 @@ class Item:
     
     @name.setter # for setting a value to a attribute 
     def name(self, value):
-        self.__name = value
-        return self.__name 
+        if len(value) > 10:
+            raise Exception("Name length is long")
+        else:
+            self.__name = value
+            return self.__name 
 
     def calculate_total_price(self):
         return self.price * self.quantity
