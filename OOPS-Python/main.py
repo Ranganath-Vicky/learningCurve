@@ -45,6 +45,29 @@ class Item:
 
     def __repr__(self):
         return f"Item('{self.name}',{self.price}, {self.quantity})"
+
+class Phone(Item):     ## Child classes
+    all = []
+    def __init__(self, name: str, price: float, quantity=1, broken_phones = 0):
+        
+        #call to super function to have access to all attributes and methods from parent class
+        super().__init__(
+            name, price, quantity
+        )
+        # Run validation to recieve arguments
+        assert broken_phones >= 0, f"Broken Phones {broken_phones} is not greater than 0!"
+        
+        # Assign to self object - instance attribute
+        self.broken_phones = broken_phones
+
+        # Actions to execute
+        Phone.all.append(self)
+
+
+phone1 = Phone("ABCPhone", 500, 5, 1)
+phone2 = Phone("ABSPhone", 700, 5, 1)
+
+print(phone1.calculate_total_price())
     
 # Item.is_integer(7.0) # calling a static method
 # Item.instantiate_from_csv() # Calling class method 
