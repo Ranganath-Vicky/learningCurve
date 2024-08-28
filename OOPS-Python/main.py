@@ -1,9 +1,15 @@
 from item import Item 
 from phone import Phone
 
-item1 = Item("MyItem", 750)
-item1.name = "vickyItemsdf"
-print(item1.name)
+item1 = Item("MyItem", 100)
+phone1 = Phone("PhoneItem", 100, 3)
+print(item1.apply_discount())
+print(phone1.apply_discount())
+# print(item1.price)
+# item1.apply_increment(0.2)
+# print(item1.price)
+# item1.apply_discount()
+# print(item1.price)
 
 # Item.instantiate_from_csv()
 # print(Item.all)
