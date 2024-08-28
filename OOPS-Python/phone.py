@@ -1,6 +1,7 @@
 from item import Item
 
 class Phone(Item):     ## Child classes
+    pay_rate = 0.65
     def __init__(self, name: str, price: float, quantity=1, broken_phones = 0):
         
         #call to super function to have access to all attributes and methods from parent class
