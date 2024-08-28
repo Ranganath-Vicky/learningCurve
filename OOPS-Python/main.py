@@ -1,70 +1,19 @@
-import csv
+from item import Item 
+from phone import Phone
 
-class Item: 
-    #class attribute 
-    pay_rate = 0.8 # Pay rate after 20% discount
-    all = []
+item1 = Item("MyItem", 750)
+item1.name = "OtherItem"
+ 
+print(item1.name)
 
-    def __init__(self, name: str, price: float, quantity=1): #default values and validating the datatypes for input arguments
-        
-        # Run validation to recieve arguments
-        assert price >= 0, f"Price {price} is not greater than 50!" 
-        assert quantity >= 0, f"Quantity {quantity} is not greater than 0!"
-        
-        # Assign to self object - instance attribute
-        self.name = name #Dynamic attribute for class instance
-        self.price = price
-        self.quantity = quantity
+# Item.instantiate_from_csv()
+# print(Item.all)
 
-        # Actions to execute
-        Item.all.append(self)
+# item1 = Item("ABCPhone", 500, 5)
+# phone2 = Phone("ABSPhone", 700, 5, 1)
 
-    def calculate_total_price(self):
-        return self.price * self.quantity
-    
-    def apply_discount(self):
-        self.price = self.price * self.pay_rate
-
-    @classmethod # Decorator to convert a method to classmethod
-    def instantiate_from_csv(cls): # Class Method - class reference is passed as input argument
-        with open('items.csv', 'r') as f:
-            reader = csv.DictReader(f)
-            items = list(reader)
-
-        for item in items:
-            Item(name = item.get('name'), 
-                 price = float(item.get('price')),
-                 quantity= int(item.get('quantity')),
-                 )
-    
-    # Static method
-    @staticmethod
-    def is_integer(num):
-        if isinstance(num, float):
-            return num.is_integer()
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}('{self.name}',{self.price}, {self.quantity})"
-
-class Phone(Item):     ## Child classes
-    def __init__(self, name: str, price: float, quantity=1, broken_phones = 0):
-        
-        #call to super function to have access to all attributes and methods from parent class
-        super().__init__(
-            name, price, quantity
-        )
-        # Run validation to recieve arguments
-        assert broken_phones >= 0, f"Broken Phones {broken_phones} is not greater than 0!"
-        
-        # Assign to self object - instance attribute
-        self.broken_phones = broken_phones
-
-
-item1 = Item("ABCPhone", 500, 5)
-phone2 = Phone("ABSPhone", 700, 5, 1)
-
-print(phone2.calculate_total_price())
-print(Item.all)
+# print(phone2.calculate_total_price())
+# print(Item.all)
     
 # Item.is_integer(7.0) # calling a static method
 # Item.instantiate_from_csv() # Calling class method 
