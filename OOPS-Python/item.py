@@ -13,7 +13,7 @@ class Item:
         assert quantity >= 0, f"Quantity {quantity} is not greater than 0!"
         
         # Assign to self object - instance attribute
-        self._name = name #Dynamic attribute for class instance
+        self.__name = name #Dynamic attribute for class instance
         self.price = price
         self.quantity = quantity
 
@@ -23,7 +23,12 @@ class Item:
     @property
     # Property decorator - read only attribute 
     def name(self):
-        return self._name
+        return self.__name
+    
+    @name.setter # for setting a value to a attribute 
+    def name(self, value):
+        self.__name = value
+        return self.__name 
 
     def calculate_total_price(self):
         return self.price * self.quantity
